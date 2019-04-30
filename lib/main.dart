@@ -13,8 +13,9 @@ class MyApp extends StatelessWidget {
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'M!KE Firebase',
-      home: Register(),
+      home: Authen(),
     );
   }
 }
