@@ -1,4 +1,4 @@
-package th.go.jnapp.jittifirebase;
+package th.go.mkapp.mikefirebase;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

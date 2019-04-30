@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -8,6 +9,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
 // Explicit
   final formKey = GlobalKey<FormState>();
+  String nameString, emailString, passwordString;
 
   Widget passwordTextFormField() {
     return TextFormField(
@@ -31,6 +33,9 @@ class _RegisterState extends State<Register> {
         } else if (value.length <= 5) {
           return 'กรอก รหัสผ่าน ไม่พอเว้ยเฮ้ย';
         }
+      },
+      onSaved: (String value) {
+        passwordString = value;
       },
     );
   }
@@ -58,6 +63,9 @@ class _RegisterState extends State<Register> {
           return 'กรอก อีเมล์ ผิดรูปแบบเว้ยเฮ้ย';
         }
       },
+      onSaved: (String value) {
+        emailString = value;
+      },
     );
   }
 
@@ -82,6 +90,9 @@ class _RegisterState extends State<Register> {
           return 'กรอก ชื่อ ด้วยสิฟะ';
         }
       },
+      onSaved: (String value) {
+        nameString = value;
+      },
     );
   }
 
@@ -91,7 +102,11 @@ class _RegisterState extends State<Register> {
       tooltip: 'Upload to Firebase',
       onPressed: () {
         print("you click upload");
-        if (formKey.currentState.validate()) {}
+        if (formKey.currentState.validate()) {
+          formKey.currentState.save();
+          print(
+              'name = $nameString , email = $emailString , password= $passwordString');
+        }
       },
     );
   }
