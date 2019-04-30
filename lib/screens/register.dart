@@ -6,6 +6,9 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+// Explicit
+  final formKey = GlobalKey<FormState>();
+
   Widget passwordTextFormField() {
     return TextFormField(
       obscureText: true,
@@ -22,24 +25,39 @@ class _RegisterState extends State<Register> {
             Icons.vpn_key,
             color: Colors.black,
           )),
+      validator: (String value) {
+        if (value.length == 0) {
+          return 'กรอก รหัสผ่าน ด้วยสิฟะ';
+        } else if (value.length <= 5) {
+          return 'กรอก รหัสผ่าน ไม่พอเว้ยเฮ้ย';
+        }
+      },
     );
   }
 
   Widget emailTextFormField() {
     return TextFormField(
       decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15.0),
-              borderSide: BorderSide(
-                width: 1.0,
-                color: Colors.grey,
-              )),
-          labelText: 'Email',
-          hintText: 'Type your Email',
-          icon: Icon(
-            Icons.email,
-            color: Colors.black,
-          )),
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15.0),
+            borderSide: BorderSide(
+              width: 1.0,
+              color: Colors.grey,
+            )),
+        labelText: 'Email',
+        hintText: 'Type your Email',
+        icon: Icon(
+          Icons.email,
+          color: Colors.black,
+        ),
+      ),
+      validator: (String value) {
+        if (value.length == 0) {
+          return 'กรอก อีเมล์ ด้วยสิฟะ';
+        } else if (!((value.contains('@')) && (value.contains('.')))) {
+          return 'กรอก อีเมล์ ผิดรูปแบบเว้ยเฮ้ย';
+        }
+      },
     );
   }
 
@@ -59,6 +77,11 @@ class _RegisterState extends State<Register> {
             Icons.face,
             color: Colors.black,
           )),
+      validator: (String value) {
+        if (value.length == 0) {
+          return 'กรอก ชื่อ ด้วยสิฟะ';
+        }
+      },
     );
   }
 
@@ -68,6 +91,7 @@ class _RegisterState extends State<Register> {
       tooltip: 'Upload to Firebase',
       onPressed: () {
         print("you click upload");
+        if (formKey.currentState.validate()) {}
       },
     );
   }
@@ -80,32 +104,35 @@ class _RegisterState extends State<Register> {
         title: Text("Register"),
         actions: <Widget>[uploadButton()],
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: RadialGradient(
-            colors: [
-              Colors.white,
-              Colors.white,
-            ],
-            radius: 1.5,
-            center: Alignment(0, 0),
+      body: Form(
+        key: formKey,
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: RadialGradient(
+              colors: [
+                Colors.white,
+                Colors.white,
+              ],
+              radius: 1.5,
+              center: Alignment(0, 0),
+            ),
           ),
-        ),
-        padding: EdgeInsets.all(50.0),
-        child: Column(
-          children: <Widget>[
-            Container(
-              child: nameTextFormField(),
-            ),
-            Container(
-              child: emailTextFormField(),
-              padding: EdgeInsets.only(top: 20.0),
-            ),
-            Container(
-              child: passwordTextFormField(),
-              padding: EdgeInsets.only(top: 20.0),
-            ),
-          ],
+          padding: EdgeInsets.all(50.0),
+          child: Column(
+            children: <Widget>[
+              Container(
+                child: nameTextFormField(),
+              ),
+              Container(
+                child: emailTextFormField(),
+                padding: EdgeInsets.only(top: 20.0),
+              ),
+              Container(
+                child: passwordTextFormField(),
+                padding: EdgeInsets.only(top: 20.0),
+              ),
+            ],
+          ),
         ),
       ),
     );

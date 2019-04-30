@@ -83,8 +83,8 @@ class _AuthenState extends State<Authen> {
         child: Column(
           children: <Widget>[
             Container(
-              width: 150.0,
-              height: 150.0,
+              width: 300.0,
+              height: 300.0,
               child: showLogo(),
             ),
             Container(margin: EdgeInsets.only(top: 15.0), child: showAppName()),
