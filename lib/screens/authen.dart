@@ -30,7 +30,6 @@ class _AuthenState extends State<Authen> {
     return TextFormField(
       decoration:
           InputDecoration(labelText: 'Email :', hintText: 'you@mail.com'),
-      style: TextStyle(color: Colors.white),
     );
   }
 
@@ -38,8 +37,9 @@ class _AuthenState extends State<Authen> {
     return TextFormField(
       obscureText: true,
       decoration: InputDecoration(
-          labelText: 'Password :', hintText: 'More 6 Charactor'),
-      style: TextStyle(color: Colors.white),
+        labelText: 'Password :',
+        hintText: 'More 6 Charactor',
+      ),
     );
   }
 
@@ -65,7 +65,7 @@ class _AuthenState extends State<Authen> {
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                colors: [Colors.black54, Colors.black],
+                colors: [Colors.black87, Colors.black87],
                 begin: Alignment(1, 0))),
         padding: EdgeInsets.only(top: 80.0),
         alignment: Alignment(0, -1),
